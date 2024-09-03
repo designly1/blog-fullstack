@@ -36,3 +36,8 @@ yarn-error.log*
 # Misc
 .DS_Store
 *.pem
+
+#PNPM, NPM, YARM lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock

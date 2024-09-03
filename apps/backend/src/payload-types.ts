@@ -10,6 +10,7 @@ export interface Config {
   collections: {
     users: User;
     blogs: Blog;
+    photos: Photo;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
   };
@@ -23,6 +24,9 @@ export interface User {
   id: string;
   updatedAt: string;
   createdAt: string;
+  enableAPIKey?: boolean | null;
+  apiKey?: string | null;
+  apiKeyIndex?: string | null;
   email: string;
   resetPasswordToken?: string | null;
   resetPasswordExpiration?: string | null;
@@ -39,13 +43,34 @@ export interface User {
 export interface Blog {
   id: string;
   title: string;
-  slug?: string | null;
+  coverPhoto: string | Photo;
+  slug: string;
+  excerpt: string;
   content: {
     [k: string]: unknown;
   }[];
   status?: ('draft' | 'published') | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "photos".
+ */
+export interface Photo {
+  id: string;
+  title: string;
+  prefix?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  url?: string | null;
+  filename?: string | null;
+  mimeType?: string | null;
+  filesize?: number | null;
+  width?: number | null;
+  height?: number | null;
+  focalX?: number | null;
+  focalY?: number | null;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -80,9 +105,4 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
-}
-
-
-declare module 'payload' {
-  export interface GeneratedTypes extends Config {}
 }

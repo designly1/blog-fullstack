@@ -1,19 +1,29 @@
 import React, { useEffect, useRef } from "react";
 import { kebabCase } from "lodash";
-import { TextInput, useField, useWatchForm } from "payload/components/forms";
+import { TextInput, useFieldType } from "payload/components/forms";
 
-export interface SlugInputProps {
+import { TextField } from "payload/types";
+
+export type SlugInputProps = TextField & {
   trackingField: string;
-}
+};
 
 export default function SlugInput(props: SlugInputProps) {
-  const { trackingField } = props;
+  const {
+    trackingField,
+    required,
+    admin: { readOnly },
+  } = props;
 
-  const { getDataByPath } = useWatchForm();
-  const { value: slugValue = "", setValue: setSlugValue } = useField<string>({
-    path: "slug",
+  const { value: slugValue = "", setValue: setSlugValue } =
+    useFieldType<string>({
+      path: "slug",
+    });
+
+  const { value: trackingFieldValue } = useFieldType<string>({
+    path: trackingField,
   });
-  const trackingFieldValue = getDataByPath<string>(trackingField) || "";
+
   const prevTrackingFieldValueRef = useRef(trackingFieldValue);
   const stopTrackingRef = useRef(false);
 
@@ -41,13 +51,15 @@ export default function SlugInput(props: SlugInputProps) {
         description={
           slugValue
             ? `Auto generated based on ${trackingField}`
-            : `Will be auto-generated from ${trackingField} when save`
+            : `Will be auto-generated from ${trackingField} when saved`
         }
         value={slugValue}
         onChange={(e) => {
           setSlugValue(e.target.value);
           stopTrackingRef.current = true;
         }}
+        readOnly={readOnly}
+        required={required}
       />
     </div>
   );

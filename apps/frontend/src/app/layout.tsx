@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
+
+import { Next13NProgress } from "nextjs13-progress";
+import { Link } from "nextjs13-progress";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +19,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <main className="min-h-screen bg-base-300">
+          <header className="flex items-center justify-center text-2xl font-bold py-10 bg-base-100">
+            <Link href="/">The Blog</Link>
+          </header>
+          {children}
+        </main>
+        <Next13NProgress height={7} color="#29D" />
+      </body>
     </html>
   );
 }

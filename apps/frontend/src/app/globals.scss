@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.post-body {
+  @apply flex flex-col gap-6;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-primary font-bold;
+  }
+
+  h1 {
+    @apply text-2xl md:text-3xl;
+  }
+
+  h2 {
+    @apply text-xl md:text-2xl border-b-2 border-white/20 mt-10 mb-4;
+  }
+
+  h3,
+  h4 {
+    @apply text-xl mt-6;
+  }
+
+  pre {
+    @apply overflow-auto;
+  }
+
+  table {
+    @apply table w-full bg-zinc-900;
+
+    tr {
+      td {
+        white-space: normal;
+      }
+    }
+  }
+
+  li {
+    @apply mb-3;
+  }
+
+  ul {
+    @apply ml-8 list-disc mb-8;
+  }
+
+  ol {
+    @apply ml-8 mb-8 list-decimal;
+  }
+
+  a {
+    @apply link-primary;
+  }
+
+  iframe {
+    @apply mx-auto mb-8 max-w-full;
+  }
+
+  code:not(pre *) {
+    @apply bg-zinc-200/20 text-primary;
+    font-size: 0.9em;
+    padding: 4px 6px;
+    border-radius: 3px;
+    word-break: keep-all;
+  }
+
+  img {
+    @apply transition-all ease-in-out duration-300 hover:opacity-75 cursor-zoom-in w-fit mx-auto;
+  }
+
+  .blog-post-image {
+    @apply mx-auto my-10 rounded-md shadow-lg cursor-zoom-in hover:opacity-80 transition-all ease-in-out duration-300 w-fit;
+  }
+}

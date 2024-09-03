@@ -1,3 +1,4 @@
+import React from "react";
 import { Field } from "payload/types";
 import { merge } from "lodash";
 import SlugInput from "../ui/SlugInput";
@@ -16,7 +17,9 @@ export const slug: Slug = ({ trackingField = "title" } = {}, overrides) =>
       admin: {
         position: "sidebar",
         components: {
-          Field: SlugInput,
+          Field: (props) => (
+            <SlugInput trackingField={trackingField} {...props} />
+          ),
         },
       },
     },
